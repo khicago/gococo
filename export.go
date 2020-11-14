@@ -23,6 +23,7 @@ type (
 // About params parse:
 // 1. Empty param are not allowed, the null value should be indicate by the NilPat.
 // 2. CmdName and Params should be trim in the match procedure. (FYI, strings.TrimSpace can be used in such condition)
+// 3. Param must match word format `[A-Za-z0-9_]+`
 var Matcher MatcherHandler = defaultMatcher
 
 var Serializer SerializeHandler = defaultSerializer
