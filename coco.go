@@ -1,19 +1,10 @@
 package gococo
 
 import (
-	"fmt"
 	"strings"
 )
 
 type (
-	SerializeHandler func(co Coco) string
-
-	Coco interface {
-		fmt.Stringer
-		GetCMD() string
-		GetParams() []Param
-	}
-
 	coco struct {
 		Cmd    string  `json:"cmd"`
 		Params []Param `json:"params"`
@@ -45,20 +36,10 @@ func NewCoco(scanResult []string) Coco {
 		Cmd:    strings.TrimSpace(scanResult[0]),
 		Params: make([]Param, 0, lenRet-1),
 	}
-
-	params := scanResult[1:]
-	for _, param := range params {
-		param = strings.TrimSpace(param)
-		lenParam := len(param)
-		if lenParam <= 0 { // empty
-			continue
-		}
-		if param[lenParam-1] == ',' {
-			param = param[:lenParam-1]
-		}
+	// trust the Matcher function
+	for _, param := range scanResult[1:] {
 		cmd.Params = append(cmd.Params, Param(param))
 	}
-
 	return cmd
 }
 
