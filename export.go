@@ -28,6 +28,10 @@ var Matcher MatcherHandler = defaultMatcher
 
 var Serializer SerializeHandler = defaultSerializer
 
+// NilParam determines should a input will be considered a nil value.
+// It will be called in parse
+var NilParam = "_"
+
 func Parse(doc string) ([]Coco, bool) {
 	results, ok := Matcher(doc)
 	if !ok {
